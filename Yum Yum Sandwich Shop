@@ -20,18 +20,22 @@ if (cbGlutenFree.Checked == true)
 {
   dGlutenPrice = dGlutenPrice + 0.50
 }
+
 if (cbGuacamole.Checked == true)
 {
   inumToppings = inumToppings + 1
 }
+
 if (cbRoastedMushroom.Checked == true)
 {
   inumToppings = inumToppings + 1
 }
+
 if (cbHummus.Checked == true)
 {
   inumToppings = inumToppings + 1
 }
+
 if (rbSIXINCH.Checked == true) 
 {
   dSizePrice =  6
@@ -45,6 +49,7 @@ if (rbSIXINCH.Checked == true)
     dBreadPrice = 0
   }
 }
+
 if (rbFOOTLONG.Checked == true) 
 {
   dSizePrice =  10
@@ -58,6 +63,7 @@ if (rbFOOTLONG.Checked == true)
     dBreadPrice = 0
   }
 }
+
 inumChips = Convert.ToInt32(nudChips.Value);
 inumCookie = Convert.ToInt32(nudCookie.Value);
 inumPop = Convert.ToInt32(nudPop.Value);
