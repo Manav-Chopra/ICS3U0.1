@@ -1,11 +1,11 @@
-int inumToppings, inumChips, inumCookie, inumPop, inumOJ, inumwater;
+int inumToppings, inumChips, inumCookie, inumPop, inumOJ, inumWater;
 double dSizePrice, dToppingsPrice, dBreadPrice, dGlutenPrice, dSidesPrice, dDrinksPrice, dSubtotal, dTax, dTotal;
 inumToppings = 0
 inumChips = 0
 inumCookie = 0
 inumPop = 0
 inumOJ = 0
-inumwater = 0
+inumWater = 0
 dSizePrice = 0
 dToppingsPrice = 0
 dBreadPrice = 0
@@ -58,14 +58,14 @@ if (rbFOOTLONG.Checked == true)
     dBreadPrice = 0
   }
 }
-numChips = Convert.ToInt32(nudChips.Value);
-numCookie = Convert.ToInt32(nudCookie.Value);
-numPop = Convert.ToInt32(nudPop.Value);
-numOJ = Convert.ToInt32(nudOJ.Value);
-numWater = Convert.ToInt32(nudWater.Value);
+inumChips = Convert.ToInt32(nudChips.Value);
+inumCookie = Convert.ToInt32(nudCookie.Value);
+inumPop = Convert.ToInt32(nudPop.Value);
+inumOJ = Convert.ToInt32(nudOJ.Value);
+inumWater = Convert.ToInt32(nudWater.Value);
 
-SidesPrice = numChips * (1.50) + numChips * (2)
-DrinksPrice = numPop * (2) + numOJ * (3) + numWater * (1)
+SidesPrice = inumChips * (1.50) + inumChips * (2)
+DrinksPrice = inumPop * (2) + inumOJ * (3) + inumWater * (1)
 
 dSubtotal = dSizePrice + dToppingsPrice + dBreadPrice + dGlutenPrice + dSidesPrice + dDrinksPrice;
 dTax = dSubtotal * (0.13)
