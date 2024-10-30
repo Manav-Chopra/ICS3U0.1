@@ -1,0 +1,45 @@
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int iStart, iEnd, iIncrement, iSum, iCounter;
+
+                iStart = Convert.ToInt32(txtStart.Text);
+                iEnd = Convert.ToInt32(txtEnd.Text);
+                iIncrement = Convert.ToInt32(txtIncrement.Text);
+
+                if (iStart >= iEnd)
+                {
+                    MessageBox.Show("Erorr, start number cannot be larger/equal to end number");
+                    txtStart.Clear();
+                    txtEnd.Clear();
+                    txtIncrement.Clear();
+                    txtSum.Clear();
+                }
+
+                if
+                {
+
+                }
+
+                iSum = 0;
+
+                for (iCounter = iStart; iCounter <= iEnd; iCounter = iCounter + iIncrement)
+                {
+                    iSum = iSum + iCounter;
+                }
+      
+                txtSum.Text = iSum.ToString();
+            }
+            
+            catch
+            {
+                MessageBox.Show("Erorr, please input numbers only!!!");
+                txtStart.Clear();
+                txtEnd.Clear();
+                txtIncrement.Clear();
+                txtSum.Clear();
+            }
+        }
+    }
+}
