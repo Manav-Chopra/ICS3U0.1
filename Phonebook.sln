@@ -1,0 +1,394 @@
+namespace PhoneBook
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        //Creates Arrays to input Names an numbers into
+        string[] NameArray = new string[100];
+        string[] PhoneNumberArray = new string[100];
+
+        //Sets the next available index slot to 0
+        int iCurrentIndex = 0;
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //declares the Name and Phone number as string
+                string strName, strNumber;
+
+                //Names and numbers inputted by the user in the textboxes are saved to the variables
+                strName = Convert.ToString(txtName.Text);
+                strNumber = Convert.ToString(txtNumber.Text);
+
+                //trims the variable of extra spaces
+                strName = strName.Trim();
+                strNumber = strNumber.Trim();
+
+                //if the array is full it will let the user know and abort the program
+                if (iCurrentIndex >= 100)
+                {
+                    MessageBox.Show("Array is Full! ");
+                    return;
+                }
+
+                //if the textboxes are not filled out it will show a message box tell the user to fill them out and abort the program
+                if (strName == "" || strNumber == "")
+                {
+                    MessageBox.Show("Please input Names/Numbers!");
+                    txtName.Clear();
+                    txtNumber.Clear();
+                    return;
+                }
+
+                //add the name and number to the array at the iCurrentIndex slot and adds 1 to iCurrent Index to indicate the next available spot. It also clears the input textboxes
+                else
+                {
+                    NameArray[iCurrentIndex] = strName;
+                    PhoneNumberArray[iCurrentIndex] = strNumber;
+                    iCurrentIndex = iCurrentIndex + 1;
+                    MessageBox.Show("Successful Added to the Phone Directory");
+                    txtName.Clear();
+                    txtNumber.Clear();
+                    txtName.Focus();
+                }
+
+            }
+
+            //if there is an error that isn't caught by the if and elses it will abort the program and clear all the textboxes.
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+        }
+
+        private void btnEntries_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Clears the textbox so the next number of entries is outputted
+                txtCustomers.Clear();
+
+                //Declares the variable being used to show the number of entries in the directory
+                int iEntries;
+
+                //Number of entries is equal to the next open index (iCurrentIndex) which is the same as the number of entries
+                iEntries = iCurrentIndex;
+
+                //converts the number of entries to string and ouputs it into the correct textbox in the GUI
+                txtCustomers.Text = Convert.ToString(iEntries);
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+        }
+
+        private void btnShowall_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Clears the listboxes of previous outputs
+                lbName.Items.Clear();
+                lbPhoneNumber.Items.Clear();
+
+                //declares the variable used by the for loop
+                int i;
+
+                //for loop to add each entry on the arrays to the listboxes
+                for (i = 0; i < iCurrentIndex; i = i + 1)
+                {
+                    lbName.Items.Add(NameArray[i]);
+                    lbPhoneNumber.Items.Add(PhoneNumberArray[i]);
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+            
+        }
+
+        private void btnSearchName_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Declares the variables
+                string strName, strNumber;
+                int i;
+
+                //gives an initial value to strNumber
+                strNumber = "";
+
+                //saves strName as the input from the textbox and trims it
+                strName = txtSearchName.Text.Trim();
+
+                //checks if there is no input by the user and shows a message box prompting them to add a valid name
+                //stops the rest of the program
+                if (strName == "")
+                {
+                    MessageBox.Show("Please enter a valid name!");
+                    return;
+                }
+
+                //For loop to locate the index number of the name and finds the number with the same index number and outputs it
+                //clears the inputted name so a new name can be searched
+                //stops the rest of the program
+                for (i = 0; i < iCurrentIndex; i = i + 1)
+                {
+                    if (NameArray[i] == strName)
+                    {
+                        strNumber = PhoneNumberArray[i];
+                        txtSearchNumber.Text = strNumber;
+                        txtSearchName.Clear();
+                        return;
+                    }
+                }
+                //shows a message box tell the user that the person is not in the directory
+                //clears the inputted name
+                MessageBox.Show("Person is not in the directory!");
+                txtSearchName.Clear();
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+        }
+
+        private void btnSearchNumber_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //declares the variables
+                string strName, strNumber;
+                int i;
+
+                //gives the variable strName an initial value
+                strName = "";
+
+                //saves strNumber as the input from the textbox and trims it
+                strNumber = txtSearchNumber.Text.Trim();
+
+                //checks if the user inputted nothing and shows a message box telling them to input a valid number
+                //stops the program from going on
+                if (strNumber == "")
+                {
+                    MessageBox.Show("Please enter a valid number!");
+                    return;
+                }
+
+                //For loop to locate the index number of the number and finds the name with the same index number and outputs it
+                //clears the inputted name so a new number can be searched
+                //stops the rest of the program
+                for (i = 0; i < iCurrentIndex; i = i + 1)
+                {
+                    if (PhoneNumberArray[i] == strNumber)
+                    {
+                        strName = NameArray[i];
+                        txtSearchName.Text = strName;
+                        txtSearchName.Clear();
+                        return;
+                    }
+                }
+
+                //tells the user the number is not in the directory
+                MessageBox.Show("Number is not in the directory!");
+                txtSearchName.Clear();
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //declares the variables
+                int i;
+                string strName, strNumber;
+
+                //saves the name and new number in the variables and trims them
+                strName = txtEditName.Text.Trim();
+                strNumber = txtNewNumber.Text.Trim();
+
+                //if the user has inputted nothing it will prompt the user to put in a name/number
+                //stops the program from going on
+                if (strNumber == "" || strName =="")
+                {
+                    MessageBox.Show("Please enter a name/number");
+                    return;
+                }
+
+                //finds the name in the array with the same index and changes the number, tells the user it's been changed and aborts the program
+                for (i = 0; i < iCurrentIndex; i = i + 1)
+                {
+                    if (NameArray[i] == strName)
+                    {
+                        PhoneNumberArray[i] = strNumber;
+                        MessageBox.Show("Number successfully changed!");
+                        txtEditName.Clear();
+                        txtNewNumber.Clear();
+                        return;
+                    }
+                }
+
+                //tells the user that the person they inputted is not in the directory and clears the textboxes
+                MessageBox.Show("Person is not in the directory!");
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Declares the variables
+                string strName;
+                int i, ii;
+
+                //saves strName as the input from the textbox and trims it
+                strName = txtEditName.Text.Trim();
+
+                //checks if there is no input by the user and shows a message box prompting them to add a valid name
+                //stops the rest of the program
+                if (strName == "")
+                {
+                    MessageBox.Show("Please enter a valid name!");
+                    return;
+                }
+
+                for (i = 0; i < iCurrentIndex; i = i + 1)
+                {
+                    if (NameArray[i] == strName)
+                    {
+                        PhoneNumberArray[i] = "";
+                        NameArray[i] = "";
+
+                        for (ii = i ; ii < iCurrentIndex - 1; ii = ii + 1)
+                        {
+                            NameArray[ii] = NameArray[ii + 1];
+                            PhoneNumberArray[ii] = PhoneNumberArray[ii + 1];
+                        }
+
+                        MessageBox.Show("Number successfully deleted");
+
+                        NameArray[ii + 1] = "";
+                        PhoneNumberArray[ii + 1] = "";
+
+                        iCurrentIndex = iCurrentIndex - 1;
+
+                        return;
+                    }
+                }
+
+                //shows a message box tell the user that the person is not in the directory
+                //clears the inputted name
+                MessageBox.Show("Person is not in the directory!");
+                txtSearchName.Clear();
+            }
+
+            catch
+            {
+                MessageBox.Show("Error!");
+                txtName.Clear();
+                txtNumber.Clear();
+                txtCustomers.Clear();
+                txtSearchName.Clear();
+                txtSearchNumber.Clear();
+                txtEditName.Clear();
+                txtNewNumber.Clear();
+                txtName.Focus();
+                return;
+            }
+        }
+
+        private void lbName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index;
+
+            index = lbName.SelectedIndex;
+
+            lbPhoneNumber.SelectedIndex = index;
+        }
+
+        private void lbPhoneNumber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index;
+
+            index = lbPhoneNumber.SelectedIndex;
+
+            lbName.SelectedIndex = index;
+        }
+    }
+}
