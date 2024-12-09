@@ -1,0 +1,108 @@
+namespace Triangle_Calculations
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        
+        public void ClearAll()
+        {
+            txtSide1.Clear();
+            txtSide2.Clear();
+            txtSide3.Clear();
+            txtResults.Clear();
+        }
+
+        public void CheckValue()
+        {
+            if (txtSide1.Text == "" || txtSide1.Text == "" || txtSide1.Text == "")
+            {
+                MessageBox.Show("Please fill out all textboxes!!!");
+                ClearAll();
+            }
+        }
+
+        public double CalculatePerimeter(double dNum1, double dNum2, double dNum3)
+        {
+            double dPerimeter;
+
+            dPerimeter = dNum1 + dNum2 + dNum3;
+
+            return dPerimeter;
+        }
+
+        public string CheckTriangleType(double dNum1, double dNum2, double dNum3)
+        {
+          string strTriangleType;
+
+          if (dNum1 == dNum2 && dNum1 == dNum3)
+          {
+            strTriangleType = "Equilateral";
+          }
+
+          else if (dNum1 == dNum2 || dNum1 == dNum3)
+          {
+            strTriangleType = "Isosceles";
+          }
+
+          else
+          {
+            strTriangleType = "Scalene";
+          }
+
+          return strTriangleType
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double dNum1, dNum2, dNum3, dResults;
+
+                CheckValue();
+
+                dNum1 = Convert.ToDouble(txtSide1.Text);
+                dNum2 = Convert.ToDouble(txtSide2.Text);
+                dNum3 = Convert.ToDouble(txtSide3.Text);
+
+                dResults = CalculatePerimeter(dNum1, dNum2, dNum3);
+
+                txtResults.Text = dResults.ToString();
+            }
+
+            catch
+            {
+                MessageBox.Show("Erorr!!!");
+                ClearAll();
+                return;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+          try
+            {
+              double dNum1, dNum2, dNum3, dResults;
+
+              CheckValue();
+
+              dNum1 = Convert.ToDouble(txtSide1.Text);
+              dNum2 = Convert.ToDouble(txtSide2.Text);
+              dNum3 = Convert.ToDouble(txtSide3.Text);
+
+              dResults = CheckTriangleType();
+
+              txtResults.Text = dResults.ToString();
+            }
+
+          catch
+            {
+              MessageBox.Show("Erorr!!!");
+              ClearAll();
+              return;
+            }
+        }
+    }
+}
